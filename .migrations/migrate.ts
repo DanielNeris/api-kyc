@@ -3,13 +3,13 @@ import { migrate } from 'drizzle-orm/postgres-js/migrator'
 import postgres from 'postgres'
 import 'dotenv/config'
 
-import { env } from '../src/env'
-
 async function runMigration() {
   console.log('Migration started ⌛')
 
   const dbUrl = (
-    env.NODE_ENV === 'production' ? env.DATABASE_URL : env.DATABASE_URL
+    process.env.NODE_ENV === 'production'
+      ? process.env.DATABASE_URL
+      : process.env.DATABASE_URL
   ) as string
 
   if (!dbUrl) throw new Error('No database url found')
