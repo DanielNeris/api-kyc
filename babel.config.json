@@ -3,11 +3,5 @@
     "@babel/preset-env",
     "@babel/preset-typescript"
   ],
-  "ignore": [
-    "**/*.test.ts",
-    "**/*.test.js"
-  ],
-  "include": [
-    ".drizzle/**/*.ts"
-  ]
+  "plugins": []
 }
