@@ -12,7 +12,6 @@ RUN corepack enable
 # Install apk and curl
 RUN apk update && apk add curl bash
 WORKDIR /app
-COPY package.json yarn-lock.yaml ./
 # Fetch deps with caching
 RUN --mount=type=cache,id=s/<service-id>-/root/.local/share/yarn/store,target=/root/.local/share/yarn/store \
     yarn fetch --frozen-lockfile
@@ -28,7 +27,6 @@ FROM base AS build
 RUN corepack enable
 RUN apk update && apk add curl bash
 WORKDIR /app
-COPY package.json yarn-lock.yaml ./
 # Fetch deps with caching
 RUN --mount=type=cache,id=s/<service-id>-/root/.local/share/yarn/store,target=/root/.local/share/yarn/store \
     yarn fetch --frozen-lockfile
