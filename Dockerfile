@@ -14,10 +14,10 @@ RUN apk update && apk add curl bash
 WORKDIR /app
 # Fetch deps with caching
 RUN --mount=type=cache,id=s/<service-id>-/root/.local/share/yarn/store,target=/root/.local/share/yarn/store \
-    yarn fetch --frozen-lockfile
+    yarn fetch 
 # Install prod deps with caching
 RUN --mount=type=cache,id=s/<service-id>-/root/.local/share/yarn/store,target=/root/.local/share/yarn/store \
-    yarn install --frozen-lockfile --prod
+    yarn install  --prod
 
 #
 # BUILD STAGE
@@ -29,10 +29,10 @@ RUN apk update && apk add curl bash
 WORKDIR /app
 # Fetch deps with caching
 RUN --mount=type=cache,id=s/<service-id>-/root/.local/share/yarn/store,target=/root/.local/share/yarn/store \
-    yarn fetch --frozen-lockfile
+    yarn fetch 
 # Install all deps with caching
 RUN --mount=type=cache,id=s/<service-id>-/root/.local/share/yarn/store,target=/root/.local/share/yarn/store \
-    yarn install --frozen-lockfile
+    yarn install 
 COPY . .
 # Set Node options for increased memory
 ENV NODE_OPTIONS="--max-old-space-size=4096"
