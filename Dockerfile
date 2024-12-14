@@ -4,11 +4,14 @@ FROM node:20
 # Definir o diretório de trabalho
 WORKDIR /usr/src/app
 
-# Copiar as dependências
+# Copiar dependências
 COPY package*.json yarn.lock ./
 
-# Instalar as dependências
+# Instalar dependências
 RUN yarn install
+
+# Copiar o script wait-for-it.sh
+COPY wait-for-it.sh /usr/src/app/
 
 # Copiar os arquivos da aplicação
 COPY . .
@@ -19,8 +22,8 @@ ENV NODE_ENV=production
 # Compilar o TypeScript
 RUN yarn build
 
-# Gerar e aplicar as migrações
-RUN yarn migrate
+# Esperar pelo banco de dados e rodar migrações
+RUN ./wait-for-it.sh pg:5432 -- yarn migrate
 
 # Expor a porta da aplicação
 EXPOSE 3333
