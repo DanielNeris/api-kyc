@@ -4,17 +4,17 @@ FROM node:20 AS builder
 # Define o diretório de trabalho
 WORKDIR /app
 
-# Copia o package.json e o lockfile para otimizar o cache
-COPY package.json package-lock.json ./
+# Copia o arquivo package.json e yarn.lock para otimizar o cache
+COPY package.json yarn.lock ./
 
 # Instala dependências
-RUN npm install
+RUN yarn install
 
-# Copia o restante do código
+# Copia o restante do código para o container
 COPY . .
 
-# Gera o código transpilado e migrações do Drizzle
-RUN npm run build
+# Gera o código transpilado (se você usa TypeScript) e migrações do Drizzle
+RUN yarn build
 RUN npx drizzle-kit generate:pg && npx drizzle-kit up:pg
 
 # Production Stage
@@ -23,10 +23,10 @@ FROM node:20 AS production
 # Define o diretório de trabalho
 WORKDIR /usr/src/app
 
-# Copia os artefatos necessários do builder
+# Copia os artefatos necessários do estágio de build
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/.drizzle ./.drizzle
-COPY --from=builder /app/package.json /app/package-lock.json ./
+COPY --from=builder /app/package.json /app/yarn.lock ./
 COPY --from=builder /app/node_modules ./node_modules
 
 # Copia o arquivo .env (opcional; prefira usar secrets em produção)
@@ -36,4 +36,4 @@ COPY .env .env
 EXPOSE 3333
 
 # Inicia a aplicação
-CMD ["npm", "run", "start"]
+CMD ["yarn", "start"]
