@@ -1,26 +1,29 @@
-# Use Node.js as the base image
+# Use Node.js como imagem base
 FROM node:20
 
-# Set the working directory
+# Definir o diretório de trabalho
 WORKDIR /usr/src/app
 
-# Copy dependencies
+# Copiar as dependências
 COPY package*.json yarn.lock ./
 
-# Install dependencies
+# Instalar as dependências
 RUN yarn install
 
-# Copy application files
+# Copiar os arquivos da aplicação
 COPY . .
 
-# Set environment variables
+# Definir o ambiente para produção
 ENV NODE_ENV=production
 
-# Generate and apply migrations
+# Compilar o TypeScript
+RUN yarn build
+
+# Gerar e aplicar as migrações
 RUN yarn migrate
 
-# Expose the application's port
+# Expor a porta da aplicação
 EXPOSE 3333
 
-# Start the application
+# Iniciar a aplicação
 CMD ["yarn", "start"]
