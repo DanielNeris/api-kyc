@@ -4,14 +4,14 @@ FROM node:20
 # Set the working directory
 WORKDIR /usr/src/app
 
-# Copy the application files
-COPY . .
+# Copy dependencies
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Generate and apply migrations
-RUN npx drizzle-kit generate && npx drizzle-kit migrate
+# Copy the application files
+COPY . .
 
 # Expose the application's port
 EXPOSE 3333
