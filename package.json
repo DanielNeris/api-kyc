@@ -4,10 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "yarn migrate && tsx watch --env-file .env src/http/server.ts",
-    "migrate": "yarn drizzle-kit generate && yarn drizzle-kit migrate",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate --config drizzle.config.ts",
+    "db:migrateprod": "NODE_ENV=production node .drizzle/migrate.js",
     "build": "babel src --out-dir dist --extensions \".ts,.tsx\"",
-    "start": "NODE_ENV=production node dist/http/server.js"
+    "start": "yarn db:migrateprod && node dist/http/server.js",
+    "dev": "yarn db:migrate && tsx watch --env-file .env src/http/server.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
