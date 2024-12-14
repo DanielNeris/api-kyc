@@ -9,7 +9,7 @@ async function runMigration() {
   const dbUrl = (
     process.env.NODE_ENV === 'production'
       ? process.env.DATABASE_URL
-      : process.env.DEV_DATABASE_URL
+      : process.env.DATABASE_URL
   ) as string
 
   if (!dbUrl) throw new Error('No database url found')
@@ -22,7 +22,7 @@ async function runMigration() {
 
   const db = drizzle(client)
   try {
-    await migrate(db, { migrationsFolder: './.drizzle/migrations' })
+    await migrate(db, { migrationsFolder: './.migrations/migrations' })
     console.log('Migration completed ✅')
   } catch (error) {
     console.error('Migration failed 🚨:', error)
@@ -30,3 +30,7 @@ async function runMigration() {
     await client.end()
   }
 }
+
+runMigration().catch(error =>
+  console.error('Error in migration process 🚨:', error)
+)
