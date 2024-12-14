@@ -6,7 +6,7 @@
   "scripts": {
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate --config drizzle.config.ts",
-    "db:migrateprod": "NODE_ENV=production tsx .drizzle/migrate.ts",
+    "db:migrateprod": "NODE_ENV=production node .drizzle/migrate.ts",
     "build": "babel src --out-dir dist --extensions \".ts,.tsx\"",
     "start": "yarn db:migrateprod && node dist/http/server.js",
     "dev": "yarn db:migrate && tsx watch --env-file .env src/http/server.ts"
