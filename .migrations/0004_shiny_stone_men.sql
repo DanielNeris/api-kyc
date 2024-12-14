@@ -1,0 +1,1 @@
+ALTER TABLE "files" ADD COLUMN "views" integer DEFAULT 0;
