@@ -1,4 +1,4 @@
-name: 'dnd-backend'
+version: '3.8'
 
 services:
   backend:
@@ -9,10 +9,12 @@ services:
       - '3333:3333'
     environment:
       DATABASE_URL: postgresql://docker:docker@pg:5432/dnd
-      JWT_SECRET: secret
-      BASE_URL: ${BASE_URL}
+      JWT_SECRET: your_jwt_secret
+      BASE_URL: http://localhost:3333
     depends_on:
       - pg
+    networks:
+      - app-network
 
   pg:
     image: bitnami/postgresql:13.16.0
@@ -24,6 +26,11 @@ services:
       POSTGRES_DB: dnd
     volumes:
       - postgres_data:/bitnami/postgresql
+    networks:
+      - app-network
 
 volumes:
   postgres_data:
+
+networks:
+  app-network:
