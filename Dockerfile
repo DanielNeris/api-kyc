@@ -26,6 +26,7 @@ WORKDIR /usr/src/app
 # Copia os artefatos necessários do estágio de build
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/.migrations ./.migrations
+COPY --from=builder /app/.migrations/meta ./.migrations/meta
 COPY --from=builder /app/package.json /app/yarn.lock ./
 COPY --from=builder /app/node_modules ./node_modules
 
