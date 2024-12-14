@@ -15,7 +15,7 @@ COPY . .
 
 # Gera o código transpilado (se você usa TypeScript) e migrações do Drizzle
 RUN yarn build
-RUN npx drizzle-kit generate && npx drizzle-kit migrate
+RUN npx drizzle-kit generate && npx drizzle-kit up:pg
 
 # Production Stage
 FROM node:20 AS production
