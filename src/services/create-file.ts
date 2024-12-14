@@ -55,7 +55,7 @@ export async function createFile({ file, userId }: FileRequest) {
     })
     .returning()
 
-  const shareableLink = `${env.BASE_URL}/public/files/${insertedFile.id}`
+  const shareableLink = `${env.BASE_URL}/api/public/files/${insertedFile.id}`
 
   await db
     .update(files)
