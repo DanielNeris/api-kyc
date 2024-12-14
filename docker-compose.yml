@@ -1,11 +1,23 @@
-name: pocket-js-server
+version: '3.9'
 
 services:
-  pg:
+  postgres:
     image: bitnami/postgresql:13.16.0
+    container_name: dnd
     ports:
       - '5432:5432'
     environment:
-      - POSTGRES_USER=docker
-      - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=inorbit
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: dnd
+    volumes:
+      - postgres_data:/bitnami/postgresql
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U docker"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
