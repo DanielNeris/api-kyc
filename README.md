@@ -7,13 +7,14 @@ This is the backend for the file management system. It enables file uploads, gen
 
 ## **Requirements**
 
-- Node.js (>= 18.x)
-- PostgreSQL database
-- Yarn or npm
+- Docker (>= 20.x)
+- Docker Compose (>= 1.29.x)
 
 ---
 
 ## **Installation**
+
+### **Using Docker**
 
 1. **Clone the repository:**
    ```bash
@@ -28,34 +29,45 @@ This is the backend for the file management system. It enables file uploads, gen
    ```
    Update the `.env` file with your configuration:
    ```env
-   DATABASE_URL=postgresql://user:password@localhost:5432/file_manager
+   DATABASE_URL=postgresql://user:password@db:5432/file_manager
    JWT_SECRET=your_secret_key
    BASE_URL=http://localhost:3333
    ```
 
-3. **Install dependencies:**
+3. **Build and run the services:**
    ```bash
-   npm install
+   docker-compose up --build
    ```
+
+   This will:
+   - Start the API server.
+   - Set up a PostgreSQL database.
 
 4. **Run database migrations:**
    ```bash
-   npm run migrate
+   docker-compose exec app npm run migrate
    ```
 
 ---
 
-## **Running the Server**
+## **Running the Server Locally (Without Docker)**
 
-- **Development mode:**
-  ```bash
-  npm run dev
-  ```
-- **Production mode:**
-  ```bash
-  npm run build
-  npm start
-  ```
+If you prefer running the project locally, follow these steps:
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Run database migrations:
+   ```bash
+   npm run migrate
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
 ---
 
