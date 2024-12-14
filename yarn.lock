@@ -889,7 +889,7 @@
   resolved "https://registry.yarnpkg.com/@biomejs/cli-win32-x64/-/cli-win32-x64-1.9.4.tgz#4c7afa90e3970213599b4095e62f87e5972b2340"
   integrity sha512-8Y5wMhVIPaWe6jw2H+KlEm4wP/f7EW3810ZLmDlrEEy5KvBsb9ECEfu/kMWD484ijfQ8+nIi0giMgu9g1UAuuA==
 
-"@drizzle-team/brocli@^0.10.2":
+"@drizzle-team/brocli@^0.10.1":
   version "0.10.2"
   resolved "https://registry.yarnpkg.com/@drizzle-team/brocli/-/brocli-0.10.2.tgz#9757c006a43daaa6f45512e6cf5fabed36fb9da7"
   integrity sha512-z33Il7l5dKjUgGULTqBsQBQwckHh5AbIuxhdsIxDDiZAzBOrZO6q9ogcWC65kU382AfynTfgNumVcNIjuIua6w==
@@ -1694,20 +1694,20 @@ dotenv@^16.4.7:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.4.7.tgz#0e20c5b82950140aa99be360a8a5f52335f53c26"
   integrity sha512-47qPchRCykZC03FhkYAhrvwU4xDBFIj1QPqaarj6mdM/hgUzfPHcpkHJOn3mJAufFeeAxAzeGsr5X0M4k6fLZQ==
 
-drizzle-kit@^0.30.1:
-  version "0.30.1"
-  resolved "https://registry.yarnpkg.com/drizzle-kit/-/drizzle-kit-0.30.1.tgz#79f000fdd96d837cc63d30b2e4b32d34c2cd4154"
-  integrity sha512-HmA/NeewvHywhJ2ENXD3KvOuM/+K2dGLJfxVfIHsGwaqKICJnS+Ke2L6UcSrSrtMJLJaT0Im1Qv4TFXfaZShyw==
+drizzle-kit@^0.24.2:
+  version "0.24.2"
+  resolved "https://registry.yarnpkg.com/drizzle-kit/-/drizzle-kit-0.24.2.tgz#928a56a6a2bec1c5725321f559ec51dc5a943412"
+  integrity sha512-nXOaTSFiuIaTMhS8WJC2d4EBeIcN9OSt2A2cyFbQYBAZbi7lRsVGJNqDpEwPqYfJz38yxbY/UtbvBBahBfnExQ==
   dependencies:
-    "@drizzle-team/brocli" "^0.10.2"
+    "@drizzle-team/brocli" "^0.10.1"
     "@esbuild-kit/esm-loader" "^2.5.5"
     esbuild "^0.19.7"
     esbuild-register "^3.5.0"
 
-drizzle-orm@^0.38.2:
-  version "0.38.2"
-  resolved "https://registry.yarnpkg.com/drizzle-orm/-/drizzle-orm-0.38.2.tgz#11cfaa6f17d9d7736306334de17615456b63ae84"
-  integrity sha512-eCE3yPRAskLo1WpM9OHpFaM70tBEDsWhwR/0M3CKyztAXKR9Qs3asZlcJOEliIcUSg8GuwrlY0dmYDgmm6y5GQ==
+drizzle-orm@^0.33.0:
+  version "0.33.0"
+  resolved "https://registry.yarnpkg.com/drizzle-orm/-/drizzle-orm-0.33.0.tgz#ece81e3e85f7559b5f7c01fc09e654e9a2f087fe"
+  integrity sha512-SHy72R2Rdkz0LEq0PSG/IdvnT3nGiWuRk+2tXZQ90GVq/XQhpCzu/EFT3V2rox+w8MlkBQxifF8pCStNYnERfA==
 
 eastasianwidth@^0.2.0:
   version "0.2.0"
