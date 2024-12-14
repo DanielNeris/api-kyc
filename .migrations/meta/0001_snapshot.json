@@ -1,6 +1,6 @@
 {
-  "id": "89db74fa-91cd-487f-90b3-89509f083246",
-  "prevId": "1b3b07a9-20d9-4ba6-ab44-e9de70e5d540",
+  "id": "afaa4722-2af6-4a16-918d-19c0af090307",
+  "prevId": "8cbfe29c-71fb-443e-9487-e2ff1a6da20c",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -38,12 +38,6 @@
           "primaryKey": false,
           "notNull": true
         },
-        "size": {
-          "name": "size",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
         "url": {
           "name": "url",
           "type": "text",
@@ -52,9 +46,22 @@
         },
         "tags": {
           "name": "tags",
-          "type": "jsonb",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "shareable_link": {
+          "name": "shareable_link",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "views": {
+          "name": "views",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
         },
         "created_at": {
           "name": "created_at",
@@ -81,7 +88,10 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     },
     "public.users": {
       "name": "users",
@@ -131,12 +141,18 @@
             "email"
           ]
         }
-      }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     }
   },
   "enums": {},
   "schemas": {},
   "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
   "_meta": {
     "columns": {},
     "schemas": {},
