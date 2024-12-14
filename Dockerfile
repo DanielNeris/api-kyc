@@ -11,7 +11,7 @@ COPY . .
 RUN npm install
 
 # Generate and apply migrations
-RUN npm run drizzle-kit generate && npm run drizzle-kit migrate
+RUN npx drizzle-kit generate && npx drizzle-kit migrate
 
 # Expose the application's port
 EXPOSE 3333
