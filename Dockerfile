@@ -5,16 +5,22 @@ FROM node:20
 WORKDIR /usr/src/app
 
 # Copy dependencies
-COPY package*.json ./
+COPY package*.json yarn.lock ./
 
 # Install dependencies
-RUN npm install
+RUN yarn install
 
-# Copy the application files
+# Copy application files
 COPY . .
+
+# Set environment variables
+ENV NODE_ENV=production
+
+# Generate and apply migrations
+RUN yarn migrate
 
 # Expose the application's port
 EXPOSE 3333
 
 # Start the application
-CMD ["npm", "run", "dev"]
+CMD ["yarn", "start"]
