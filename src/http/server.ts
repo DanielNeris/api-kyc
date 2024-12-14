@@ -64,7 +64,7 @@ app.register(
 
 app
   .listen({
-    port: 3333,
+    port: env.PORT || 3333,
   })
   .then(() => {
     console.log('HTTP Server running!')
