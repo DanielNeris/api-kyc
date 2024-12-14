@@ -10,11 +10,11 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
+# Build the application
+RUN npm run drizzle-kit generate && npm run drizzle-kit migrate
+
 # Copy the application files
 COPY . .
-
-# Build the application
-RUN npm run build
 
 # Expose the application's port
 EXPOSE 3333
