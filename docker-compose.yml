@@ -1,3 +1,5 @@
+name: dnd-db
+
 services:
   pg:
     image: bitnami/postgresql:13.16.0
