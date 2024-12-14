@@ -1,59 +1,39 @@
-# `Dockerfile`
+# Build Stage: Use Node.js as the base image for building
+FROM node:20 AS builder
 
-FROM node:20-alpine AS base
-
-#
-# INSTALL STAGE
-#
-FROM base AS prod-deps
-
-# Access yarn with Corepack
-RUN corepack enable
-# Install apk and curl
-RUN apk update && apk add curl bash
+# Define o diretório de trabalho
 WORKDIR /app
-# Fetch deps with caching
-RUN --mount=type=cache,id=s/<service-id>-/root/.local/share/yarn/store,target=/root/.local/share/yarn/store \
-    yarn fetch 
-# Install prod deps with caching
-RUN --mount=type=cache,id=s/<service-id>-/root/.local/share/yarn/store,target=/root/.local/share/yarn/store \
-    yarn install  --prod
 
-#
-# BUILD STAGE
-# 
-FROM base AS build
+# Copia o package.json e o lockfile para otimizar o cache
+COPY package.json package-lock.json ./
 
-RUN corepack enable
-RUN apk update && apk add curl bash
-WORKDIR /app
-# Fetch deps with caching
-RUN --mount=type=cache,id=s/<service-id>-/root/.local/share/yarn/store,target=/root/.local/share/yarn/store \
-    yarn fetch 
-# Install all deps with caching
-RUN --mount=type=cache,id=s/<service-id>-/root/.local/share/yarn/store,target=/root/.local/share/yarn/store \
-    yarn install 
+# Instala dependências
+RUN npm install
+
+# Copia o restante do código
 COPY . .
-# Set Node options for increased memory
-ENV NODE_OPTIONS="--max-old-space-size=4096"
-# Build the application with caching
-RUN --mount=type=cache,id=s/<service-id>-/root/.cache/yarn,target=/root/.cache/yarn \
-    NODE_ENV=production yarn run build
 
-#
-# PRODUCTION STAGE
-#
-FROM base
+# Gera o código transpilado e migrações do Drizzle
+RUN npm run build
+RUN npx drizzle-kit generate:pg && npx drizzle-kit up:pg
 
-RUN corepack enable
-WORKDIR /app
-COPY --from=prod-deps /app/node_modules ./node_modules
-COPY --from=build /app/build ./build
-# Need package.json to specify yarn version which Corepack installs
-COPY --from=build /app/package.json ./package.json
-# Copy Drizzle config so we can migrate prior to building
-COPY --from=build /app/.drizzle ./.drizzle
-COPY --from=build /app/drizzle.config.ts ./drizzle.config.ts
-# Expose the port the app runs on
+# Production Stage
+FROM node:20 AS production
+
+# Define o diretório de trabalho
+WORKDIR /usr/src/app
+
+# Copia os artefatos necessários do builder
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/.drizzle ./.drizzle
+COPY --from=builder /app/package.json /app/package-lock.json ./
+COPY --from=builder /app/node_modules ./node_modules
+
+# Copia o arquivo .env (opcional; prefira usar secrets em produção)
+COPY .env .env
+
+# Expõe a porta da aplicação
 EXPOSE 3333
-CMD ["yarn", "start"]
+
+# Inicia a aplicação
+CMD ["npm", "run", "start"]
