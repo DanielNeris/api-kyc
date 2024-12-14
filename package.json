@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "tsx watch --env-file .env src/http/server.ts",
-    "build": "yarn install && yarn drizzle-kit generate && yarn drizzle-kit migrate"
+    "build": "yarn install && yarn drizzle-kit generate && yarn drizzle-kit migrate && tsc"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
