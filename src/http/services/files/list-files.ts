@@ -1,16 +1,8 @@
-import { eq } from 'drizzle-orm'
 import { db } from '@db/index'
 import { files } from '@db/schema'
 
-interface ListFileRequest {
-  userId: string
-}
-
-export async function listFiles({ userId }: ListFileRequest) {
-  const userFiles = await db
-    .select()
-    .from(files)
-    .where(eq(files.userId, userId))
+export async function listFiles() {
+  const userFiles = await db.select().from(files)
 
   return {
     files: userFiles.map(file => ({
@@ -19,8 +11,6 @@ export async function listFiles({ userId }: ListFileRequest) {
       originalName: file.originalName,
       type: file.type,
       url: file.url,
-      tags: file.tags,
-      views: file.views,
       shareableLink: file.shareableLink,
       createdAt: file.createdAt,
     })),

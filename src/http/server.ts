@@ -12,7 +12,7 @@ import fastifyStatic from '@fastify/static'
 import { env } from '@/env'
 import { authenticate } from '@http/middleware/authenticate'
 import { authRoutes } from '@http/modules/auth/routes'
-// import { fileRoutes } from '@http/routes/files'
+import { fileRoutes } from '@http/modules/files/routes'
 
 const app = fastify().withTypeProvider()
 
@@ -30,7 +30,7 @@ app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
 app.register(authRoutes, { prefix: '/api/auth' })
-// app.register(fileRoutes, { prefix: '/api/files' })
+app.register(fileRoutes, { prefix: '/api/files' })
 
 app.listen({ port: env.PORT || 3333, host: '0.0.0.0' }).then(() => {
   console.log('HTTP Server running!')
