@@ -1,11 +1,11 @@
-import { listFiles } from '@/http/services/files/list-files'
+import { getFile } from '@/http/services/files/get-file'
 import type { FastifyRequest, FastifyReply } from 'fastify'
 
 export async function getFileController(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
-  const result = await listFiles({
+  const result = await getFile({
     userId: (request.user as { id: string }).id,
   })
 
