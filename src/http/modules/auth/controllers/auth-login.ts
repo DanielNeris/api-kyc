@@ -13,7 +13,7 @@ export async function loginController(
 ) {
   const { email, password } = schema.parse(request.body)
 
-  const { token, user } = await authLogin({ email, password })
+  const { token } = await authLogin({ email, password })
 
-  return reply.send({ token, user })
+  return reply.send({ token })
 }
