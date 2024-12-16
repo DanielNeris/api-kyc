@@ -1,12 +1,16 @@
-import { integer, pgTable, text, timestamp, varchar } from 'drizzle-orm/pg-core'
+import { pgTable, text, timestamp, varchar, pgEnum } from 'drizzle-orm/pg-core'
 import { createId } from '@paralleldrive/cuid2'
+
+const userRoles = pgEnum('user_roles', ['admin', 'user'])
 
 export const users = pgTable('users', {
   id: text('id')
     .primaryKey()
     .$default(() => createId()),
+  name: text('name').notNull(),
   email: text('email').notNull().unique(),
   passwordHash: text('password_hash').notNull(),
+  role: userRoles('role').notNull(),
   createdAt: timestamp('created_at', { withTimezone: true })
     .notNull()
     .defaultNow(),
@@ -26,9 +30,7 @@ export const files = pgTable('files', {
   originalName: text('original_name').notNull(),
   type: varchar('type', { length: 50 }).notNull(),
   url: text('url').notNull(),
-  tags: text('tags').$type<string[]>(),
   shareableLink: text('shareable_link'),
-  views: integer('views').default(0),
   createdAt: timestamp('created_at', { withTimezone: true })
     .notNull()
     .defaultNow(),

@@ -48,6 +48,7 @@ app.decorate('authenticate', async (request, reply) => {
     reply.status(401).send({ error: 'Unauthorized' })
   }
 })
+
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
