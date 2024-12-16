@@ -9,7 +9,18 @@
     "declaration": true,
     "outDir": "./dist",
     "moduleResolution": "Node",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@http/*": [
+        "./src/http/*"
+      ],
+      "@db/*": [
+        "./src/db/*"
+      ],
+    },
   },
   "include": [
     "src/**/*",
