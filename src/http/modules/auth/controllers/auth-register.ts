@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import { authRegister } from '@/http/services/auth/auth-register'
 import type { FastifyRequest, FastifyReply } from 'fastify'
+import type { UserRole } from '@/db/schema'
 
 const schema = z
   .object({
@@ -23,7 +24,9 @@ export async function registerController(
 ) {
   const { fullName, role, email, password } = schema.parse(request.body)
 
-  await authRegister({ fullName, role, email, password })
+  const userRole = role as UserRole
+
+  await authRegister({ fullName, role: userRole, email, password })
 
   return reply.status(201).send({ message: 'User registered successfully' })
 }
