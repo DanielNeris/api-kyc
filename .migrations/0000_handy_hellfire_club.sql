@@ -29,6 +29,15 @@ CREATE TABLE IF NOT EXISTS "kyc" (
 	"updated_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "kyc_status_history" (
+	"id" text PRIMARY KEY NOT NULL,
+	"kyc_id" text NOT NULL,
+	"user_id" text NOT NULL,
+	"kyc_status_history" "kyc_status_history" DEFAULT 'pending' NOT NULL,
+	"changed_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"remarks" text
+);
+--> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "files" ADD CONSTRAINT "files_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
@@ -43,6 +52,18 @@ END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "kyc" ADD CONSTRAINT "kyc_file_id_files_id_fk" FOREIGN KEY ("file_id") REFERENCES "public"."files"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "kyc_status_history" ADD CONSTRAINT "kyc_status_history_kyc_id_kyc_id_fk" FOREIGN KEY ("kyc_id") REFERENCES "public"."kyc"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "kyc_status_history" ADD CONSTRAINT "kyc_status_history_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

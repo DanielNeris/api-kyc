@@ -6,8 +6,6 @@ export async function checkAdminRole(
 ) {
   const user = request.user as { role: string }
 
-  console.log(user)
-
   if (!user || user.role !== 'admin') {
     return reply
       .status(403)

@@ -11,3 +11,9 @@ export const kycStatusEnum = pgEnum('status', [
   KycStatus.PENDING,
   KycStatus.REJECTED,
 ])
+
+export const kycStatusHistoryEnum = pgEnum('kyc_status_history', [
+  KycStatus.APPROVED,
+  KycStatus.PENDING,
+  KycStatus.REJECTED,
+])

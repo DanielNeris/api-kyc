@@ -1,10 +1,10 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
-import { fileUploadRoute } from './create-file.routes'
+import { createKycRoute } from './create-kyc.routes'
 import { listFilesRoute } from './list-files.routes'
 import { shareFileRoute } from './share-file.routes'
 
-export const fileRoutes: FastifyPluginAsyncZod = async app => {
-  await app.register(fileUploadRoute)
+export const kycRoutes: FastifyPluginAsyncZod = async app => {
+  await app.register(createKycRoute)
   await app.register(listFilesRoute)
   await app.register(shareFileRoute)
 }

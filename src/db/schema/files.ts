@@ -1,6 +1,6 @@
 import { pgTable, text, varchar, timestamp } from 'drizzle-orm/pg-core'
 import { createId } from '@paralleldrive/cuid2'
-import { users } from './users'
+import { users } from '.'
 
 export const files = pgTable('files', {
   id: text('id')

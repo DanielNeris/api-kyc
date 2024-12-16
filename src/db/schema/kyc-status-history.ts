@@ -1,23 +1,23 @@
 import { pgTable, text, timestamp } from 'drizzle-orm/pg-core'
 import { createId } from '@paralleldrive/cuid2'
-import { users, files } from '.'
-import { KycStatus, kycStatusEnum } from '../enums'
+import { kyc, users } from '.'
+import { KycStatus, kycStatusHistoryEnum } from '../enums'
 
-export const kyc = pgTable('kyc', {
+export const kycStatusHistory = pgTable('kyc_status_history', {
   id: text('id')
     .primaryKey()
     .$default(() => createId()),
+  kycId: text('kyc_id')
+    .notNull()
+    .references(() => kyc.id),
   userId: text('user_id')
     .notNull()
     .references(() => users.id),
-  fileId: text('file_id')
+  status: kycStatusHistoryEnum('kyc_status_history')
     .notNull()
-    .references(() => files.id),
-  status: kycStatusEnum('status').notNull().default(KycStatus.PENDING),
+    .default(KycStatus.PENDING),
   createdAt: timestamp('created_at', { withTimezone: true })
     .notNull()
     .defaultNow(),
-  updatedAt: timestamp('updated_at', { withTimezone: true })
-    .notNull()
-    .defaultNow(),
+  remarks: text('remarks'),
 })

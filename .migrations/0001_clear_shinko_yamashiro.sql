@@ -1,0 +1,1 @@
+ALTER TABLE "kyc_status_history" RENAME COLUMN "changed_at" TO "created_at";

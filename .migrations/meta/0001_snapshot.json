@@ -1,6 +1,6 @@
 {
-  "id": "969216ed-93c2-444e-9501-8d51e4afeea0",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "28cee70e-8e04-4f42-87d8-664f2ed43db4",
+  "prevId": "969216ed-93c2-444e-9501-8d51e4afeea0",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -247,8 +247,8 @@
           "notNull": true,
           "default": "'pending'"
         },
-        "changed_at": {
-          "name": "changed_at",
+        "created_at": {
+          "name": "created_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
