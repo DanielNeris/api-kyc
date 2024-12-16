@@ -3,13 +3,13 @@ version: '3.9'
 services:
   postgres:
     image: bitnami/postgresql:13.16.0
-    container_name: dnd
+    container_name: kyc-db
     ports:
-      - '5432:5432'
+      - '5433:5432'
     environment:
       POSTGRES_USER: docker
       POSTGRES_PASSWORD: docker
-      POSTGRES_DB: dnd
+      POSTGRES_DB: kyc-db
     volumes:
       - postgres_data:/bitnami/postgresql
     restart: unless-stopped
