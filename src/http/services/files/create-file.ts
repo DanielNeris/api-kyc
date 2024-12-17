@@ -14,7 +14,6 @@ interface FileRequest {
 
 export async function createFile({ file, userId }: FileRequest) {
   const allowedTypes = [
-    // Imagens
     'image/jpeg', // .jpeg, .jpg
     'image/png', // .png
     'image/gif', // .gif
@@ -26,7 +25,7 @@ export async function createFile({ file, userId }: FileRequest) {
     throw new Error('Only images are allowed')
   }
 
-  const uploadDir = path.resolve(__dirname, '..', '..', 'uploads')
+  const uploadDir = path.resolve(__dirname, '..', '..', '..', '..', 'uploads')
   await fs.promises.mkdir(uploadDir, { recursive: true })
 
   const timestamp = Date.now()
