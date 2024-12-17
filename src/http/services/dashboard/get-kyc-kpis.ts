@@ -1,6 +1,6 @@
-import { KycStatus, UserRole } from '@/db/enums'
-import { db } from '@db/index'
-import { kyc, users } from '@db/schema'
+import { KycStatus, UserRole } from '../../../db/enums'
+import { db } from '../../../db'
+import { kyc, users } from '../../../db/schema../../../db/schema'
 import { count, eq } from 'drizzle-orm'
 
 export async function getKycKpis() {

@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import type { FastifyRequest, FastifyReply } from 'fastify'
-import { authRegister } from '@/http/services/auth/auth-register'
-import type { UserRole } from '@/db/enums'
+import { authRegister } from '../../../services/auth/auth-register'
+import type { UserRole } from '../../../../db/enums'
 
 const schema = z
   .object({

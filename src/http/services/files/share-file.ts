@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm'
-import { db } from '@db/index'
-import { files } from '@db/schema'
+import { db } from '../../../db'
+import { files } from '../../../db/schema../../../db/schema'
 
 interface ListFileRequest {
   id: string

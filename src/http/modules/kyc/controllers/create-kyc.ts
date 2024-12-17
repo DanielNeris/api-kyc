@@ -1,5 +1,5 @@
 import type { FastifyRequest, FastifyReply } from 'fastify'
-import { createKyc } from '@/http/services/kyc/create-kyc'
+import { createKyc } from '../../../services/kyc/create-kyc'
 import { z } from 'zod'
 
 const schema = z.object({

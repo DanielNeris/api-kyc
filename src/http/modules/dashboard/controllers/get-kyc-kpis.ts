@@ -1,4 +1,4 @@
-import { getKycKpis } from '@/http/services/dashboard/get-kyc-kpis'
+import { getKycKpis } from '../../../services/dashboard/get-kyc-kpis'
 import type { FastifyRequest, FastifyReply } from 'fastify'
 
 export async function getKycKpisController(

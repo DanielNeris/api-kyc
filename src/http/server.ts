@@ -9,11 +9,11 @@ import fastifyJwt from '@fastify/jwt'
 import fastifyMultipart from '@fastify/multipart'
 import fastifyStatic from '@fastify/static'
 
-import { env } from '@/env'
-import { authenticate } from '@http/middleware/authenticate'
-import { authRoutes } from '@http/modules/auth/routes'
-import { kycRoutes } from '@/http/modules/kyc/routes'
-import { dashboardRoutes } from '@/http/modules/dashboard/routes'
+import { env } from '../env'
+import { authenticate } from '../http/middleware/authenticate'
+import { authRoutes } from './modules/auth/routes'
+import { kycRoutes } from './modules/kyc/routes'
+import { dashboardRoutes } from './modules/dashboard/routes'
 
 const app = fastify().withTypeProvider()
 

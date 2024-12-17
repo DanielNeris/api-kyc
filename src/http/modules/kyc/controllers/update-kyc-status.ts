@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import type { FastifyRequest, FastifyReply } from 'fastify'
-import { updateKycStatus } from '@/http/services/kyc/update-kyc-status'
-import { KycStatus } from '@/db/enums'
+import { updateKycStatus } from '../../../services/kyc/update-kyc-status'
+import { KycStatus } from '../../../../db/enums'
 
 const schema = z.object({
   kycId: z.string().min(1, 'KYC ID is required.'),

@@ -1,4 +1,4 @@
-import { getKyc } from '@/http/services/kyc/get-kyc'
+import { getKyc } from '../../../services/kyc/get-kyc'
 import type { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 

@@ -1,8 +1,8 @@
 import { eq } from 'drizzle-orm'
-import { db } from '@db/index'
-import { kyc } from '@db/schema'
+import { db } from '../../../db'
+import { kyc } from '../../../db/schema../../../db/schema'
 import type { MultipartFile } from '@fastify/multipart'
-import { KycStatus } from '@/db/enums'
+import { KycStatus } from '../../../db/enums'
 import { createFile } from '../files/create-file'
 import { createKycStatusHistory } from '../kyc-status-history/create-kyc-status-history'
 

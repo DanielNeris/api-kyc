@@ -1,4 +1,4 @@
-import { getKycStatusHistory } from '@/http/services/kyc-status-history/get-kyc-status-history'
+import { getKycStatusHistory } from '../../../services/kyc-status-history/get-kyc-status-history'
 import type { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 

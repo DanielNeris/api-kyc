@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { authLogin } from '@/http/services/auth/auth-login'
+import { authLogin } from '../../../services/auth/auth-login'
 import type { FastifyRequest, FastifyReply } from 'fastify'
 
 const schema = z.object({

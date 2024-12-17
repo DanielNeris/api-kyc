@@ -1,5 +1,5 @@
-import { kyc, users, files } from '@/db/schema'
-import { db } from '@db/index'
+import { kyc, users, files } from '../../../db/schema'
+import { db } from '../../../db'
 import { desc, eq } from 'drizzle-orm'
 
 export async function listKyc() {

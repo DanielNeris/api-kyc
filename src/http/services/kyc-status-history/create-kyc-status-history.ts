@@ -1,7 +1,7 @@
 import { eq } from 'drizzle-orm'
-import { db } from '@db/index'
-import { kyc, kycStatusHistory } from '@db/schema'
-import type { KycStatus } from '@/db/enums'
+import { db } from '../../../db'
+import { kyc, kycStatusHistory } from '../../../db/schema../../../db/schema'
+import type { KycStatus } from '../../../db/enums'
 
 interface KycStatusHistoryRequest {
   kycId: string

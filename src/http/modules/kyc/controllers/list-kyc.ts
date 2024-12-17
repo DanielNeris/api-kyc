@@ -1,4 +1,4 @@
-import { listKyc } from '@/http/services/kyc/list-kyc'
+import { listKyc } from '../../../services/kyc/list-kyc'
 import type { FastifyReply, FastifyRequest } from 'fastify'
 
 export async function listKycController(

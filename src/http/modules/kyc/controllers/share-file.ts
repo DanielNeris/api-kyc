@@ -1,4 +1,4 @@
-import { shareFile } from '@/http/services/files/share-file'
+import { shareFile } from '../../../services/files/share-file'
 import type { FastifyRequest, FastifyReply } from 'fastify'
 
 export async function shareFileController(

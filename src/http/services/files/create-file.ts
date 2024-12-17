@@ -2,9 +2,9 @@ import type { MultipartFile } from '@fastify/multipart'
 import fs from 'node:fs'
 import path from 'node:path'
 import crypto from 'node:crypto'
-import { files } from '@db/schema'
-import { db } from '@db/index'
-import { env } from '@/env'
+import { files } from '../../../db/schema../../../db/schema'
+import { db } from '../../../db'
+import { env } from '../../../env'
 
 interface FileRequest {
   file: MultipartFile

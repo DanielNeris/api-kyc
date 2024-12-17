@@ -1,8 +1,8 @@
 import { eq } from 'drizzle-orm'
 import bcrypt from 'bcryptjs'
-import { db } from '@db/index'
-import { users } from '@db/schema'
-import type { UserRole } from '@/db/enums'
+import { db } from '../../../db'
+import { users } from '../../../db/schema../../../db/schema'
+import type { UserRole } from '../../../db/enums'
 
 interface AuthRegisterRequest {
   email: string

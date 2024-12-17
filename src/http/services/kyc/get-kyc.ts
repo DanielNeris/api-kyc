@@ -1,6 +1,11 @@
 import { desc, eq } from 'drizzle-orm'
-import { db } from '@db/index'
-import { files, kyc, kycStatusHistory, users } from '@db/schema'
+import { db } from '../../../db'
+import {
+  files,
+  kyc,
+  kycStatusHistory,
+  users,
+} from '../../../db/schema../../../db/schema'
 
 interface getKycRequest {
   userId: string
