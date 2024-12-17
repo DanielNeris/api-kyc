@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm'
+import { desc, eq } from 'drizzle-orm'
 import { db } from '@db/index'
 import { kyc, kycStatusHistory } from '@db/schema'
 
@@ -13,10 +13,11 @@ export async function getKycStatusHistory({ kycId }: KycStatusHistoryRequest) {
     throw new Error('Kyc not found')
   }
 
-  const [kycHistory] = await db
+  const kycHistory = await db
     .select()
     .from(kycStatusHistory)
-    .where(eq(kyc.id, kycId))
+    .where(eq(kycStatusHistory.kycId, kycId))
+    .orderBy(desc(kycStatusHistory.createdAt))
 
   return { kycHistory }
 }
