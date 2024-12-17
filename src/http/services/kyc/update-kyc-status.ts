@@ -31,6 +31,7 @@ export async function updateKycStatus({
     .update(kyc)
     .set({
       status,
+      remarks,
       updatedAt: new Date(),
     })
     .where(eq(kyc.id, kycId))

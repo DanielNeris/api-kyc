@@ -5,7 +5,6 @@ import crypto from 'node:crypto'
 import { files } from '@db/schema'
 import { db } from '@db/index'
 import { env } from '@/env'
-import { eq } from 'drizzle-orm'
 
 interface FileRequest {
   file: MultipartFile
@@ -43,21 +42,13 @@ export async function createFile({ file, userId }: FileRequest) {
       filename: uniqueName,
       originalName: file.filename,
       type: file.mimetype,
-      url: `/uploads/${uniqueName}`,
+      url: `${env.BASE_URL}/uploads/${uniqueName}`,
     })
     .returning()
-
-  const shareableLink = `${env.BASE_URL}/api/public/files/${insertedFile.id}`
-
-  await db
-    .update(files)
-    .set({ shareableLink })
-    .where(eq(files.id, insertedFile.id))
 
   return {
     file: {
       ...insertedFile,
-      shareableLink,
     },
   }
 }

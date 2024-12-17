@@ -16,7 +16,7 @@ export async function listKyc() {
       },
       file: {
         id: files.id,
-        url: files.shareableLink,
+        url: files.url,
       },
     })
     .from(kyc)

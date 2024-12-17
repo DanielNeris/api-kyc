@@ -13,14 +13,9 @@ export async function shareFile({ id }: ListFileRequest) {
     throw new Error('File not found')
   }
 
-  const [views] = await db
-    .update(files)
-    .set({ views: (file.views ?? 0) + 1 })
-    .where(eq(files.id, file.id))
-    .returning()
+  const [result] = await db.select().from(files).where(eq(files.id, file.id))
 
   return {
-    url: file.url,
-    views: views.views,
+    url: result.url,
   }
 }

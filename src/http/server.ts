@@ -20,7 +20,7 @@ const app = fastify().withTypeProvider()
 // Plugins
 app.register(fastifyMultipart, { limits: { fileSize: 10 * 1024 * 1024 } })
 app.register(fastifyStatic, {
-  root: path.resolve(__dirname, '..', 'uploads'),
+  root: path.resolve(__dirname, '..', '..', 'uploads'),
   prefix: '/uploads/',
 })
 app.register(fastifyCors, { origin: '*' })

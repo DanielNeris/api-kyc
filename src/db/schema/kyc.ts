@@ -20,6 +20,7 @@ export const kyc = pgTable('kyc', {
     .notNull()
     .references(() => files.id),
   status: kycStatusEnum('status').notNull().default(KycStatus.PENDING),
+  remarks: text('remarks'),
   createdAt: timestamp('created_at', { withTimezone: true })
     .notNull()
     .defaultNow(),

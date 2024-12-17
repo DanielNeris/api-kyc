@@ -1,0 +1,1 @@
+ALTER TABLE "kyc" ADD COLUMN "remarks" text;
