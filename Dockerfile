@@ -30,9 +30,6 @@ COPY --from=builder /app/.migrations/meta ./.migrations/meta
 COPY --from=builder /app/package.json /app/yarn.lock ./
 COPY --from=builder /app/node_modules ./node_modules
 
-# Copia o arquivo .env (opcional; prefira usar secrets em produção)
-COPY .env .env
-
 # Expõe a porta da aplicação
 EXPOSE 3333
 
