@@ -13,6 +13,7 @@ import { env } from '@/env'
 import { authenticate } from '@http/middleware/authenticate'
 import { authRoutes } from '@http/modules/auth/routes'
 import { kycRoutes } from '@/http/modules/kyc/routes'
+import { dashboardRoutes } from '@/http/modules/dashboard/routes'
 
 const app = fastify().withTypeProvider()
 
@@ -31,6 +32,7 @@ app.setSerializerCompiler(serializerCompiler)
 
 app.register(authRoutes, { prefix: '/api/auth' })
 app.register(kycRoutes, { prefix: '/api/kyc' })
+app.register(dashboardRoutes, { prefix: '/api/dashboard' })
 
 app.listen({ port: env.PORT || 3333, host: '0.0.0.0' }).then(() => {
   console.log('HTTP Server running!')
