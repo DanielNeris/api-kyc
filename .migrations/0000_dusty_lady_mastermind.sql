@@ -1,3 +1,15 @@
+DO $$ BEGIN
+ CREATE TYPE "public"."role" AS ENUM('admin', 'user');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ CREATE TYPE "public"."status" AS ENUM('approved', 'pending', 'rejected');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "files" (
 	"id" text PRIMARY KEY NOT NULL,
 	"user_id" text NOT NULL,
@@ -33,8 +45,8 @@ CREATE TABLE IF NOT EXISTS "kyc_status_history" (
 	"id" text PRIMARY KEY NOT NULL,
 	"kyc_id" text NOT NULL,
 	"user_id" text NOT NULL,
-	"kyc_status_history" "kyc_status_history" DEFAULT 'pending' NOT NULL,
-	"changed_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"status" "status" DEFAULT 'pending' NOT NULL,
+	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
 	"remarks" text
 );
 --> statement-breakpoint

@@ -1,34 +1,42 @@
 import { eq } from 'drizzle-orm'
-import bcrypt from 'bcryptjs'
 import { db } from '@db/index'
-import { users, type UserRole } from '@db/schema'
+import { kyc } from '@db/schema'
 import type { MultipartFile } from '@fastify/multipart'
+import { KycStatus } from '@/db/enums'
+import { createFile } from '../files/create-file'
+import { createKycStatusHistory } from '../kyc-status-history/create-kyc-status-history'
 
-interface AuthRegisterRequest {
+interface KycSubmitRequest {
   file: MultipartFile
   userId: string
 }
 
-export async function createKyc({
-  userId
-  file,
-}: AuthRegisterRequest) {
-  const [userExist] = await db
-    .select()
-    .from(users)
-    .where(eq(users.email, email))
+export async function createKyc({ userId, file }: KycSubmitRequest) {
+  const [kycExist] = await db.select().from(kyc).where(eq(kyc.userId, userId))
 
-  if (userExist) {
-    throw new Error('Email already in use')
+  if (kycExist && kycExist.status !== KycStatus.REJECTED) {
+    throw new Error(
+      'A KYC process is already in progress or approved for this user'
+    )
   }
 
-  const passwordHash = await bcrypt.hash(password, 10)
+  const { file: newFile } = await createFile({
+    file,
+    userId,
+  })
 
-  await db.insert(users).values({
-    fullName,
-    role,
-    email,
-    passwordHash,
+  const [newKyc] = await db
+    .insert(kyc)
+    .values({
+      userId,
+      fileId: newFile.id,
+      status: KycStatus.PENDING,
+    })
+    .returning()
+
+  await createKycStatusHistory({
+    kycId: newKyc.id,
+    status: KycStatus.PENDING,
   })
 
   return true

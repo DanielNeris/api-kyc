@@ -1,7 +1,7 @@
 import { getFile } from '@/http/services/files/get-file'
 import type { FastifyRequest, FastifyReply } from 'fastify'
 
-export async function getFileController(
+export async function getKycController(
   request: FastifyRequest,
   reply: FastifyReply
 ) {

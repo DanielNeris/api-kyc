@@ -1,7 +1,13 @@
-import { pgTable, text, timestamp } from 'drizzle-orm/pg-core'
+import { pgEnum, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
 import { createId } from '@paralleldrive/cuid2'
 import { users, files } from '.'
-import { KycStatus, kycStatusEnum } from '../enums'
+import { KycStatus } from '../enums'
+
+export const kycStatusEnum = pgEnum('status', [
+  KycStatus.APPROVED,
+  KycStatus.PENDING,
+  KycStatus.REJECTED,
+])
 
 export const kyc = pgTable('kyc', {
   id: text('id')

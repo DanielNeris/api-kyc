@@ -1,0 +1,1 @@
+ALTER TABLE "kyc_status_history" ALTER COLUMN "user_id" DROP NOT NULL;

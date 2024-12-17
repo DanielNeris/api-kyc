@@ -1,6 +1,6 @@
 {
-  "id": "28cee70e-8e04-4f42-87d8-664f2ed43db4",
-  "prevId": "969216ed-93c2-444e-9501-8d51e4afeea0",
+  "id": "cf99323d-6b1e-4997-be90-be37c09783ec",
+  "prevId": "05dc4560-ca17-4e35-9281-7d33e4e04734",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -237,11 +237,11 @@
           "name": "user_id",
           "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
-        "kyc_status_history": {
-          "name": "kyc_status_history",
-          "type": "kyc_status_history",
+        "status": {
+          "name": "status",
+          "type": "status",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
@@ -294,7 +294,25 @@
       "uniqueConstraints": {}
     }
   },
-  "enums": {},
+  "enums": {
+    "public.role": {
+      "name": "role",
+      "schema": "public",
+      "values": [
+        "admin",
+        "user"
+      ]
+    },
+    "public.status": {
+      "name": "status",
+      "schema": "public",
+      "values": [
+        "approved",
+        "pending",
+        "rejected"
+      ]
+    }
+  },
   "schemas": {},
   "_meta": {
     "columns": {},

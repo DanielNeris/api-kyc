@@ -1,7 +1,8 @@
 import { eq } from 'drizzle-orm'
 import bcrypt from 'bcryptjs'
 import { db } from '@db/index'
-import { users, type UserRole } from '@db/schema'
+import { users } from '@db/schema'
+import type { UserRole } from '@/db/enums'
 
 interface AuthRegisterRequest {
   email: string
@@ -33,6 +34,4 @@ export async function authRegister({
     email,
     passwordHash,
   })
-
-  return true
 }
