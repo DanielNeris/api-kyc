@@ -1,7 +1,7 @@
 
-# File Manager API
+# KYC System Backend API
 
-This is the backend for the file management system. It enables file uploads, generates shareable links, tracks views, and more.
+This is the backend for the KYC (Know Your Customer) system. It allows managing KYC data, including users submitting their information, admins approving or rejecting submissions, and storing the status history of KYC requests.
 
 ---
 
@@ -18,8 +18,8 @@ This is the backend for the file management system. It enables file uploads, gen
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-repo/file-manager-api.git
-   cd file-manager-api
+   git clone https://github.com/danielneris/api-kyc-api.git
+   cd api-kyc
    ```
 
 2. **Configure environment variables:**
@@ -29,7 +29,7 @@ This is the backend for the file management system. It enables file uploads, gen
    ```
    Update the `.env` file with your configuration:
    ```env
-   DATABASE_URL=postgresql://user:password@db:5432/file_manager
+   DATABASE_URL=
    JWT_SECRET=your_secret_key
    BASE_URL=http://localhost:3333
    ```
@@ -45,7 +45,7 @@ This is the backend for the file management system. It enables file uploads, gen
 
 4. **Run database migrations:**
    ```bash
-   docker-compose exec app npm run migrate
+   docker-compose exec app npm run db:generate && npm run db:migrate
    ```
 
 ---
@@ -57,11 +57,6 @@ If you prefer running the project locally, follow these steps:
 1. Install dependencies:
    ```bash
    npm install
-   ```
-
-2. Run database migrations:
-   ```bash
-   npm run migrate
    ```
 
 3. Start the development server:
@@ -77,7 +72,15 @@ If you prefer running the project locally, follow these steps:
 - `POST /auth/login` - User login
 - `POST /auth/register` - User registration
 
+### **KYC Management:**
+- `GET /kyc` - Get All KYC
+- `GET /kyc/:userId` - Get KYC status of a user
+- `POST /kyc/:userId/upload` - Submit user KYC details
+- `PATCH /kyc/update-status` - Update KYC status (approved or rejected)
+
+### **KYC Status History:**
+- `GET /kyc/:kycId/history` - Get KYC status history
+
 ### **File Management:**
 - `POST /files/upload` - Upload files (requires authentication)
-- `GET /public/files/:id` - View file via shareable link
-- `GET /files` - List user files (requires authentication)
+- `GET /upload/:id` - View file via shareable link
