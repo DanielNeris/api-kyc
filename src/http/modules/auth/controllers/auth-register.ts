@@ -26,7 +26,12 @@ export async function registerController(
 
   const userRole = role as UserRole
 
-  await authRegister({ fullName, role: userRole, email, password })
+  const { user } = await authRegister({
+    fullName,
+    role: userRole,
+    email,
+    password,
+  })
 
-  return reply.status(201).send({ message: 'User registered successfully' })
+  return reply.status(201).send({ user })
 }

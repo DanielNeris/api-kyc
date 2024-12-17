@@ -1,10 +1,13 @@
-import { KycStatus } from '@/db/enums'
+import { KycStatus, UserRole } from '@/db/enums'
 import { db } from '@db/index'
 import { kyc, users } from '@db/schema'
 import { count, eq } from 'drizzle-orm'
 
 export async function getKycKpis() {
-  const [{ totalUsers }] = await db.select({ totalUsers: count() }).from(users)
+  const [{ totalUsers }] = await db
+    .select({ totalUsers: count() })
+    .from(users)
+    .where(eq(users.role, UserRole.USER))
 
   const [pending, approved, rejected] = await Promise.all([
     db

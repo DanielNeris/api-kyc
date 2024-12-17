@@ -28,10 +28,15 @@ export async function authRegister({
 
   const passwordHash = await bcrypt.hash(password, 10)
 
-  await db.insert(users).values({
-    fullName,
-    role,
-    email,
-    passwordHash,
-  })
+  const [user] = await db
+    .insert(users)
+    .values({
+      fullName,
+      role,
+      email,
+      passwordHash,
+    })
+    .returning()
+
+  return { user: { id: user.id } }
 }
